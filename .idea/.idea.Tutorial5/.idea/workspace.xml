@@ -7,15 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86f1cdac-9b2a-4fc8-a904-b38ab5032ff0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tutorial5/Data/Doctor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tutorial5/Data/Medicament.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tutorial5/Data/Patient.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tutorial5/Data/Prescription.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tutorial5/Data/Prescription_Medicament.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tutorial5/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tutorial5/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tutorial5/Tutorial5.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tutorial5/Tutorial5.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="86f1cdac-9b2a-4fc8-a904-b38ab5032ff0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748100075765</updated>
-      <workItem from="1748100077673" duration="1683000" />
+      <workItem from="1748100077673" duration="2022000" />
     </task>
     <servers />
   </component>
