@@ -7,10 +7,10 @@ namespace Tutorial5.Data;
 public class Patient
 {
     [Key]
-    private int IdPatient { get; set; }
+    public int IdPatient { get; set; }
     [MaxLength(100)]
-    private string FirstName { get; set; }
+    public string FirstName { get; set; }
     [MaxLength(100)]
-    private string LastName { get; set; }
-    private DateTime BirthDate { get; set; }
+    public string LastName { get; set; }
+    public DateTime BirthDate { get; set; }
 }

@@ -7,11 +7,11 @@ namespace Tutorial5.Data;
 public class Medicament
 {
     [Key]
-    private int idMedicament { get; set; }
+    public int idMedicament { get; set; }
     [MaxLength(100)]
-    private string Name { get; set; }
+    public string Name { get; set; }
     [MaxLength(100)]
-    private string Description { get; set; }
+    public string Description { get; set; }
     [MaxLength(100)]
-    private string Type { get; set; }
+    public string Type { get; set; }
 }

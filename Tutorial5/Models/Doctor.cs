@@ -7,9 +7,9 @@ namespace Tutorial5.Data;
 public class Doctor
 {
     [Key]
-    private int idDoctor { get; set; }
+    public int IdDoctor { get; set; }
     [MaxLength(100)]
-    private string FirstName { get; set; }
-    private string LastName { get; set; }
-    private string Email { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
 }

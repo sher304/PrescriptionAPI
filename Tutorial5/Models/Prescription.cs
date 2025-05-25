@@ -7,13 +7,13 @@ namespace Tutorial5.Data;
 public class Prescription
 {
     [Key]
-    private int idPrescription { get; set; }
-    private DateTime Date { get; set; }
-    private DateTime DueDate { get; set; }
+    public int IdPrescription { get; set; }
+    public DateTime Date { get; set; }
+    public DateTime DueDate { get; set; }
     [ForeignKey(nameof(Patient))]
-    private int IdPatient { get; set; }
+    public int IdPatient { get; set; }
     [ForeignKey(nameof(Doctor))]
-    private int IdDoctor { get; set; }
+    public int IdDoctor { get; set; }
     
     public Patient Patient { get; set; }
     public Doctor Doctor { get; set; }

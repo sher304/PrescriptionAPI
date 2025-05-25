@@ -8,12 +8,12 @@ namespace Tutorial5.Data;
 public class Prescription_Medicament
 {
     [ForeignKey(nameof(Medicament))]
-    private int IdMedicament { get; set; }
+    public int IdMedicament { get; set; }
     [ForeignKey(nameof(Doctor))]
-    private int IdPrescription { get; set; }
-    private int? Dose { get; set; }
+    public int IdPrescription { get; set; }
+    public int? Dose { get; set; }
     [MaxLength(100)]
-    private string Details { get; set; }
-    private  Medicament Medicament { get; set; }
-    private  Doctor Doctor { get; set; }
+    public string Details { get; set; }
+    public  Medicament Medicament { get; set; }
+    public  Doctor Doctor { get; set; }
 }
