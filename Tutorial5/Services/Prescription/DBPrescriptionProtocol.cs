@@ -6,5 +6,5 @@ namespace Tutorial5.Services;
 public interface DBPrescriptionProtocol
 {
     public Task<List<Prescription>> getPrescriptions();
-    public Task<Prescription> addPrescription(Prescription prescription);
+    public Task<PrescirptionPatientResponseDTO> addPrescription(PrescriptionPatientRequestDTO prescription);
 }

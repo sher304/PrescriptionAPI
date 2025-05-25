@@ -6,16 +6,18 @@ public class DatabaseContext : DbContext
 {
     
     public DbSet<Prescription> Prescriptions { get; set; }
+    public DbSet<Patient> Patients { get; set; }
+    public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<Medicament> Medicaments { get; set; }
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
         modelBuilder.Entity<Medicament>().HasData(
-            new Medicament { Description = "Effective in headache", idMedicament = 1, Name = "Paracetamol", Type = "Pill"},
-            new Medicament { Description = "Effective in headache", idMedicament = 2, Name = "Citramon", Type = "Pill"}
+            new Medicament { Description = "Effective in headache", IdMedicament = 1, Name = "Paracetamol", Type = "Pill"},
+            new Medicament { Description = "Effective in headache", IdMedicament = 2, Name = "Citramon", Type = "Pill"}
         );
         
         modelBuilder.Entity<Doctor>().HasData(
@@ -39,7 +41,8 @@ public class DatabaseContext : DbContext
             new Prescription_Medicament { IdPrescription = 2, IdMedicament = 2, Dose = 1, Details = "Twice a day" }
         );
         
-        modelBuilder.Entity<Prescription_Medicament>().HasKey(pk => new { pk.IdPrescription, pk.IdMedicament });
+        modelBuilder.Entity<Prescription_Medicament>()
+            .HasKey(pm => new { pm.IdPrescription, pm.IdMedicament });
         base.OnModelCreating(modelBuilder);
     }
 }

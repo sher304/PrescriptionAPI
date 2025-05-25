@@ -66,11 +66,11 @@ namespace Tutorial5.Migrations
 
             modelBuilder.Entity("Tutorial5.Data.Medicament", b =>
                 {
-                    b.Property<int>("idMedicament")
+                    b.Property<int>("IdMedicament")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idMedicament"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMedicament"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -87,21 +87,21 @@ namespace Tutorial5.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("idMedicament");
+                    b.HasKey("IdMedicament");
 
                     b.ToTable("Medicament");
 
                     b.HasData(
                         new
                         {
-                            idMedicament = 1,
+                            IdMedicament = 1,
                             Description = "Effective in headache",
                             Name = "Paracetamol",
                             Type = "Pill"
                         },
                         new
                         {
-                            idMedicament = 2,
+                            IdMedicament = 2,
                             Description = "Effective in headache",
                             Name = "Citramon",
                             Type = "Pill"
@@ -213,9 +213,14 @@ namespace Tutorial5.Migrations
                     b.Property<int?>("Dose")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PrescriptionIdPrescription")
+                        .HasColumnType("int");
+
                     b.HasKey("IdPrescription", "IdMedicament");
 
                     b.HasIndex("IdMedicament");
+
+                    b.HasIndex("PrescriptionIdPrescription");
 
                     b.ToTable("Prescription_Medicament");
 
@@ -245,7 +250,7 @@ namespace Tutorial5.Migrations
                         .IsRequired();
 
                     b.HasOne("Tutorial5.Data.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Prescriptions")
                         .HasForeignKey("IdPatient")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -263,15 +268,21 @@ namespace Tutorial5.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tutorial5.Data.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("IdPrescription")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
+                    b.HasOne("Tutorial5.Data.Prescription", null)
+                        .WithMany("PrescriptionMedicaments")
+                        .HasForeignKey("PrescriptionIdPrescription");
 
                     b.Navigation("Medicament");
+                });
+
+            modelBuilder.Entity("Tutorial5.Data.Patient", b =>
+                {
+                    b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("Tutorial5.Data.Prescription", b =>
+                {
+                    b.Navigation("PrescriptionMedicaments");
                 });
 #pragma warning restore 612, 618
         }

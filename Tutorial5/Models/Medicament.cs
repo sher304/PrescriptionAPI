@@ -7,7 +7,7 @@ namespace Tutorial5.Data;
 public class Medicament
 {
     [Key]
-    public int idMedicament { get; set; }
+    public int IdMedicament { get; set; }
     [MaxLength(100)]
     public string Name { get; set; }
     [MaxLength(100)]

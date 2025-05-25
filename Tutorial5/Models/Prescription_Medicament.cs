@@ -9,11 +9,10 @@ public class Prescription_Medicament
 {
     [ForeignKey(nameof(Medicament))]
     public int IdMedicament { get; set; }
-    [ForeignKey(nameof(Doctor))]
+    [ForeignKey(nameof(Prescription))]
     public int IdPrescription { get; set; }
     public int? Dose { get; set; }
     [MaxLength(100)]
     public string Details { get; set; }
     public  Medicament Medicament { get; set; }
-    public  Doctor Doctor { get; set; }
 }

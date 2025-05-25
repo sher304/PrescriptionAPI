@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Tutorial5.Migrations
 {
     /// <inheritdoc />
-    public partial class InitModels : Migration
+    public partial class FixWrongForeignKey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace Tutorial5.Migrations
                 name: "Medicament",
                 columns: table => new
                 {
-                    idMedicament = table.Column<int>(type: "int", nullable: false)
+                    IdMedicament = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -40,7 +40,7 @@ namespace Tutorial5.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medicament", x => x.idMedicament);
+                    table.PrimaryKey("PK_Medicament", x => x.IdMedicament);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,32 +56,6 @@ namespace Tutorial5.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Patient", x => x.IdPatient);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Prescription_Medicament",
-                columns: table => new
-                {
-                    IdMedicament = table.Column<int>(type: "int", nullable: false),
-                    IdPrescription = table.Column<int>(type: "int", nullable: false),
-                    Dose = table.Column<int>(type: "int", nullable: true),
-                    Details = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Prescription_Medicament", x => new { x.IdPrescription, x.IdMedicament });
-                    table.ForeignKey(
-                        name: "FK_Prescription_Medicament_Doctor_IdPrescription",
-                        column: x => x.IdPrescription,
-                        principalTable: "Doctor",
-                        principalColumn: "IdDoctor",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Prescription_Medicament_Medicament_IdMedicament",
-                        column: x => x.IdMedicament,
-                        principalTable: "Medicament",
-                        principalColumn: "idMedicament",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,6 +86,32 @@ namespace Tutorial5.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Prescription_Medicament",
+                columns: table => new
+                {
+                    IdMedicament = table.Column<int>(type: "int", nullable: false),
+                    IdPrescription = table.Column<int>(type: "int", nullable: false),
+                    Dose = table.Column<int>(type: "int", nullable: true),
+                    Details = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PrescriptionIdPrescription = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prescription_Medicament", x => new { x.IdPrescription, x.IdMedicament });
+                    table.ForeignKey(
+                        name: "FK_Prescription_Medicament_Medicament_IdMedicament",
+                        column: x => x.IdMedicament,
+                        principalTable: "Medicament",
+                        principalColumn: "IdMedicament",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Prescription_Medicament_Prescription_PrescriptionIdPrescription",
+                        column: x => x.PrescriptionIdPrescription,
+                        principalTable: "Prescription",
+                        principalColumn: "IdPrescription");
+                });
+
             migrationBuilder.InsertData(
                 table: "Doctor",
                 columns: new[] { "IdDoctor", "Email", "FirstName", "LastName" },
@@ -123,7 +123,7 @@ namespace Tutorial5.Migrations
 
             migrationBuilder.InsertData(
                 table: "Medicament",
-                columns: new[] { "idMedicament", "Description", "Name", "Type" },
+                columns: new[] { "IdMedicament", "Description", "Name", "Type" },
                 values: new object[,]
                 {
                     { 1, "Effective in headache", "Paracetamol", "Pill" },
@@ -150,11 +150,11 @@ namespace Tutorial5.Migrations
 
             migrationBuilder.InsertData(
                 table: "Prescription_Medicament",
-                columns: new[] { "IdMedicament", "IdPrescription", "Details", "Dose" },
+                columns: new[] { "IdMedicament", "IdPrescription", "Details", "Dose", "PrescriptionIdPrescription" },
                 values: new object[,]
                 {
-                    { 1, 1, "Take after meals", 2 },
-                    { 2, 2, "Twice a day", 1 }
+                    { 1, 1, "Take after meals", 2, null },
+                    { 2, 2, "Twice a day", 1, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -171,25 +171,30 @@ namespace Tutorial5.Migrations
                 name: "IX_Prescription_Medicament_IdMedicament",
                 table: "Prescription_Medicament",
                 column: "IdMedicament");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescription_Medicament_PrescriptionIdPrescription",
+                table: "Prescription_Medicament",
+                column: "PrescriptionIdPrescription");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Prescription");
-
-            migrationBuilder.DropTable(
                 name: "Prescription_Medicament");
 
             migrationBuilder.DropTable(
-                name: "Patient");
+                name: "Medicament");
+
+            migrationBuilder.DropTable(
+                name: "Prescription");
 
             migrationBuilder.DropTable(
                 name: "Doctor");
 
             migrationBuilder.DropTable(
-                name: "Medicament");
+                name: "Patient");
         }
     }
 }
