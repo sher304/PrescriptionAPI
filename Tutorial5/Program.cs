@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Tutorial5.Data;
+using Tutorial5.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 // Wstrzykiwanie zależności
 // https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection
+builder.Services.AddScoped<DBPrescriptionProtocol, DBPrescriptionDelegate>();
 
 var app = builder.Build();
 

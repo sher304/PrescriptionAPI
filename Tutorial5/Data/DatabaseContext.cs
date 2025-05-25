@@ -4,6 +4,8 @@ namespace Tutorial5.Data;
 
 public class DatabaseContext : DbContext
 {
+    
+    public DbSet<Prescription> Prescriptions { get; set; }
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
