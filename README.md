@@ -32,4 +32,3 @@ A simple ASP.NET Core Web API for managing medical prescriptions, patients, doct
 
 ```bash
 git clone https://github.com/sher304/PrescriptionAPI.git
-cd PrescriptionAPI
